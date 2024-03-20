@@ -7,6 +7,12 @@
 #include "Interface/RBCharacterMovementInterface.h"
 #include "RBCharacterPlayer.generated.h"
 
+// 전방선언
+class USpringArmComponent;
+class UCameraComponent;
+class URBCharacterControlData;
+struct FInputActionValue;
+
 /**
  * 플레이어가 조작할 수 있는 캐릭터의 기본 클래스
  */
@@ -25,13 +31,13 @@ protected:
 
 private:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Character Camera")
-	TObjectPtr<class USpringArmComponent> SpringArmComponent;
+	TObjectPtr<USpringArmComponent> SpringArmComponent;
 	
 	UPROPERTY(VisibleDefaultsOnly, Category = "Character Camera")
-	TObjectPtr<class UCameraComponent> CameraComponent;
+	TObjectPtr<UCameraComponent> CameraComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Character Control Data")
-	TObjectPtr<class URBCharacterControlData> CharacterControlData;
+	TObjectPtr<URBCharacterControlData> CharacterControlData;
 
 	// Settings for Camera Movement
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -52,9 +58,9 @@ private:
 private:
 	void SetCharacterControlData();
 
-	virtual void InputActionLook(const struct FInputActionValue& Value) override;
-	virtual void InputActionMove(const struct FInputActionValue& Value) override;
-	virtual void InputActionZoom(const struct FInputActionValue& Value) override;
+	virtual void InputActionLook(const FInputActionValue& Value) override;
+	virtual void InputActionMove(const FInputActionValue& Value) override;
+	virtual void InputActionZoom(const FInputActionValue& Value) override;
 	virtual void InputActionJump() override;
 	virtual void InputActionStopJumping() override;
 	virtual void InputActionChangeRunMode() override;

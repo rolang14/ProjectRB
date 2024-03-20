@@ -7,6 +7,11 @@
 #include "Interface/RBCharacterFieldAttackInterface.h"
 #include "RBCharacterBase.generated.h"
 
+// 전방선언
+class ARBWeaponTypeBase;
+class URBCharacterStatComponent;
+class UAnimMontage;
+
 UCLASS()
 class PROJECTRB_API ARBCharacterBase : public ACharacter, public IRBCharacterFieldAttackInterface
 {
@@ -15,6 +20,11 @@ class PROJECTRB_API ARBCharacterBase : public ACharacter, public IRBCharacterFie
 public:
 	// Sets default values for this character's properties
 	ARBCharacterBase();
+
+// Get Character's Status
+public:
+	// 캐릭터의 무기 정보를 취득
+	FORCEINLINE const TObjectPtr<ARBWeaponTypeBase> GetCharacterWeapon() const { return Weapon; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,17 +36,17 @@ public:
 // Character Stat Section
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Character Stat", Meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<class URBCharacterStatComponent> Stat;
+	TObjectPtr<URBCharacterStatComponent> Stat;
 
 // Field Attack Section
 protected:
 	// 필드 어택 애니메이션 몽타주
 	UPROPERTY(EditDefaultsOnly, Category = "Character Motion")
-	TObjectPtr<class UAnimMontage> FieldAttackMontage;
+	TObjectPtr<UAnimMontage> FieldAttackMontage;
 
 	// 필드 어택 피격 애니메이션 몽타주
 	UPROPERTY(EditDefaultsOnly, Category = "Character Motion")
-	TObjectPtr<class UAnimMontage> FieldAttackHitMontage;
+	TObjectPtr<UAnimMontage> FieldAttackHitMontage;
 
 	// Perform Field Attack
 	void FieldAttack();
@@ -47,11 +57,11 @@ protected:
 private:
 	// Weapon Blueprint 받기 용도
 	UPROPERTY(EditDefaultsOnly, Category = "Character Weapon")
-	TSubclassOf<class ARBWeaponTypeBase> WeaponClass;
+	TSubclassOf<ARBWeaponTypeBase> WeaponClass;
 
 	// C++ Weapon System 사용을 위한 용도
 	UPROPERTY()
-	TObjectPtr<class ARBWeaponTypeBase> Weapon;
+	TObjectPtr<ARBWeaponTypeBase> Weapon;
 
 	// BP로 설정한 무기를 캐릭터에 셋업
 	void SetWeapon();
@@ -59,7 +69,7 @@ private:
 	// For Field Attack Interrupt and End Delegate
 	virtual void IsFieldAttackHit() override;
 	virtual void InterruptFieldAttack() override;
-	void FieldAttackEnded(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+	void FieldAttackEnded(UAnimMontage* TargetMontage, bool IsProperlyEnded);
 
 	bool bIsProcessingFieldAttack;
 	bool bCanInterruptFieldAttack;

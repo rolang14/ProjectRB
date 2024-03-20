@@ -6,6 +6,11 @@
 #include "GameFramework/PlayerController.h"
 #include "RBPlayerController.generated.h"
 
+// 전방선언
+class UInputMappingContext;
+class UInputAction;
+struct FInputActionValue;
+
 /**
  * 캐릭터를 조작하는 컨트롤러의 기본 클래스
  * 초기 기획 :
@@ -25,33 +30,33 @@ protected:
 private:
 	// Input Mapping
 	UPROPERTY(EditDefaultsOnly, Category = "InputMappingContext")
-	TObjectPtr<class UInputMappingContext> InputMappingContext;
+	TObjectPtr<UInputMappingContext> InputMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> LookAction;
+	TObjectPtr<UInputAction> LookAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> MoveAction;
+	TObjectPtr<UInputAction> MoveAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> JumpAction;
+	TObjectPtr<UInputAction> JumpAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> ZoomAction;
+	TObjectPtr<UInputAction> ZoomAction;
 
 	// 걷기/달리기 변경 키 (향후 이동/스프린트 로 변경 가능성 있음)
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> ChangeRunModeAction;
+	TObjectPtr<UInputAction> ChangeRunModeAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "InputAction")
-	TObjectPtr<class UInputAction> FieldAttackAction;
+	TObjectPtr<UInputAction> FieldAttackAction;
 
 private:
 	void SetCharacterEnhancedInput();
 
-	void Look(const struct FInputActionValue& Value);
-	void Move(const struct FInputActionValue& Value);
-	void Zoom(const struct FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+	void Move(const FInputActionValue& Value);
+	void Zoom(const FInputActionValue& Value);
 	void Jump();
 	void StopJumping();
 	void ChangeRunMode();

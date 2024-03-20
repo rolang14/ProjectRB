@@ -6,6 +6,10 @@
 #include "Animation/AnimInstance.h"
 #include "RBAnimInstance.generated.h"
 
+// 전방선언
+class ACharacter;
+class UCharacterMovementComponent;
+
 /**
  * 
  */
@@ -50,9 +54,9 @@ protected:
 private:
 	// 이 Animation 을 소유하는 캐릭터
 	UPROPERTY(VisibleDefaultsOnly, Category = "Character")
-	TObjectPtr<class ACharacter> OwnerCharacter;
+	TObjectPtr<ACharacter> OwnerCharacter;
 
 	// Character Movement 속성들을 이용하기 위함.
 	UPROPERTY(VisibleDefaultsOnly, Category = "Character")
-	TObjectPtr<class UCharacterMovementComponent> CharacterMovementComponent;
+	TObjectPtr<UCharacterMovementComponent> CharacterMovementComponent;
 };

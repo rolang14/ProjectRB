@@ -24,4 +24,8 @@ class PROJECTRB_API IRBWeaponFieldAttackInterface
 public:
 	// 해당 무기의 필드 어택 인터페이스
 	virtual void PerformWeaponFieldAttack() = 0;
+	// 필드 공격을 수행할 때 무기 소환 이펙트 재생
+	virtual void PerformWeaponSummonEffect() = 0;
+	// 필드 공격을 수행 후 무기 소멸 이펙트 재생
+	virtual void PerformWeaponDisappearEffect() = 0;
 };
